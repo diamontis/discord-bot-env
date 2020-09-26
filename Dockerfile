@@ -16,8 +16,10 @@ RUN apt-get update && apt-get install -y \
     g++ \
     make
 
-# Install Node 14
+# Install Node 14 source
 RUN -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+# Install env requirements
 RUN apt-get update && apt-get install -y \
   openssh-client \
   rsync \
@@ -37,13 +39,16 @@ RUN apt-get update && apt-get install -y \
   unzip \
   zip
 
+# Set Env
 ENV DEBIAN_FRONTEND noninteractive
 
+# Install a local MySQL server
 RUN apt-get update \
   && apt-get install -y mysql-server mysql-client libmysqlclient-dev --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+## NPM
 RUN npm install -g gulp grunt bower typescript yarn webpack
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
