@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
     xz-utils \
     gcc \
     g++ \
-    make
+    make \
+	sudo
 
 # Install Node 14 source
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
