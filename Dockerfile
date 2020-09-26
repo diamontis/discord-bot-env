@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     make
 
 # Install Node 14 source
-RUN -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
 # Install env requirements
 RUN apt-get update && apt-get install -y \
