@@ -49,7 +49,7 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ## NPM
-RUN npm install -g gulp grunt bower typescript yarn webpack
+RUN npm install -g gulp grunt bower typescript yarn webpack discord.js
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 
 CMD ["/bin/bash"]
