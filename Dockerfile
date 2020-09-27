@@ -5,12 +5,12 @@
 
 FROM ubuntu:20.04
 
-# Configure tzdata
+# Configure Env
+ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Install minimum requirements
-RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+# Install requirements
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
@@ -20,33 +20,29 @@ RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
     make \
+	openssh-client \
+	rsync \
+	git \
+	libmcrypt-dev \
+	libjpeg-dev \
+	libzlcore-dev \
+	libtiff5-dev \
+	libfreetype6-dev \
+	libwebp-dev \
+	libtk-img-dev \
+	unzip \
+	zip \
+	bzip2 \
+	python3 \
+	python3-pip \
+	lsb-release \
 	sudo
 
 # Install Node 14 source
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
 # Install env requirements
-RUN apt-get update && apt-get install -y \
-  openssh-client \
-  rsync \
-  bzip2 \
-  python3 \
-  python3-pip \
-  lsb-release \
-  nodejs \
-  git \
-  libmcrypt-dev \
-  libjpeg-dev \
-  libzlcore-dev \
-  libtiff5-dev \
-  libfreetype6-dev \
-  libwebp-dev \
-  libtk-img-dev \
-  unzip \
-  zip
-
-# Set Env
-ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get install -y nodejs
 
 # Install a local MySQL server
 RUN apt-get update \
